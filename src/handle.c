@@ -44,7 +44,7 @@ static void fin_handle(SEXP ptr){
   clean_handle(ref);
 }
 
-/* the default readfunc os fread which can cause R to freeze */
+/* the default readfunc is fread which can cause R to freeze */
 static size_t dummy_read(char *buffer, size_t size, size_t nitems, void *instream){
   return 0;
 }
@@ -114,7 +114,7 @@ static int default_verbose_cb(CURL *handle, curl_infotype type, char *data, size
 }
 
 
-/* These are defaulst that we always want to set */
+/* These are defaults that we always want to set */
 static void set_handle_defaults(reference *ref){
 
   /* the actual curl handle */
@@ -198,7 +198,7 @@ static void set_handle_defaults(reference *ref){
   set_headers(ref, NULL);
   assert(curl_easy_setopt(handle, CURLOPT_EXPECT_100_TIMEOUT_MS, 0L));
 
-  /* Send verbose outout to R front-end virtual stderr */
+  /* Send verbose output to R front-end virtual stderr */
   assert(curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, default_verbose_cb));
 
   /* Prefer using multiplex when possible */
