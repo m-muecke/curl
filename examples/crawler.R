@@ -25,7 +25,7 @@ crawl <- function(startpage, timeout = 60, slots = 100){
     h <- curl::new_handle(maxfilesize = 1e6)
     pages[[url]] <- NA
     curl::curl_fetch_multi(url, handle = h, pool = pool, done = function(res){
-      if(res$status == 200){
+      if(res$status_code == 200){
         links = get_links(res)
         cat(sprintf("Done (%d): %s (%d links)\n", length(pages), url, length(links)))
         pages[[url]] = links
@@ -38,7 +38,7 @@ crawl <- function(startpage, timeout = 60, slots = 100){
           })
         }
       } else {
-        cat(sprintf("Skipping page: %s (http %d)\n", url, res$status))
+        cat(sprintf("Skipping page: %s (http %d)\n", url, res$status_code))
       }
     }, fail = function(errmsg){
       cat(sprintf("Fail: %s (%s)\n", url, errmsg))

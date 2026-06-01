@@ -59,7 +59,7 @@
 #' # Async API
 #' data <- list()
 #' success <- function(res){
-#'   cat("Request done! Status:", res$status, "\n")
+#'   cat("Request done! Status:", res$status_code, "\n")
 #'   data <<- c(data, list(res))
 #' }
 #' failure <- function(msg){

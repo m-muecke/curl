@@ -4,7 +4,7 @@ test_that("callbacks are protected", {
   rm(progress)
   gc()
   res <- curl_fetch_memory("https://cloud.r-project.org/web/packages/curl/curl.pdf", handle = h)
-  expect_equal(res$status, 200)
+  expect_equal(res$status_code, 200)
   expect_equal(total_handles(), 1L)
   rm(h)
   gc()

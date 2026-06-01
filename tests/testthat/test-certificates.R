@@ -12,7 +12,7 @@ test_that("Invalid domain raises an error", {
   h <- new_handle(resolve = paste0("fakehostname:443:", ipaddr))
   expect_error(curl_fetch_memory("https://fakehostname", handle = h), "certificate", class = "curl_error_peer_failed_verification")
   handle_setopt(h, ssl_verifyhost = FALSE, ssl_verifypeer = FALSE)
-  expect_is(curl_fetch_memory("https://fakehostname", handle = h)$status, "integer")
+  expect_is(curl_fetch_memory("https://fakehostname", handle = h)$status_code, "integer")
 })
 
 test_that("GC works", {

@@ -111,7 +111,7 @@ res <- curl_fetch_stream(drip_url, function(x){
 # Async API
 data <- list()
 success <- function(res){
-  cat("Request done! Status:", res$status, "\n")
+  cat("Request done! Status:", res$status_code, "\n")
   data <<- c(data, list(res))
 }
 failure <- function(msg){
