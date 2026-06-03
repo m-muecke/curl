@@ -319,6 +319,8 @@ SEXP R_handle_setopt(SEXP ptr, SEXP keys, SEXP values){
     } else if (r_curl_is_slist_option(key)) {
       if(!Rf_isString(val))
         Rf_error("Value for option %s (%d) must be a string vector", optname, key);
+      if(ref->custom)
+        curl_slist_free_all(ref->custom);
       ref->custom = vec_to_slist(val);
       set_user_option(key, ref->custom);
     } else if(r_curl_is_long_option(key)){
