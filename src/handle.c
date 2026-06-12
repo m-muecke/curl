@@ -431,17 +431,14 @@ static SEXP make_info_http_version(CURL * handle){
 }
 
 static SEXP make_filetime(CURL *handle){
-  long filetime;
-  assert(curl_easy_getinfo(handle, CURLINFO_FILETIME, &filetime));
-  if(filetime < 0){
-    filetime = NA_INTEGER;
-  }
+  curl_off_t filetime;
+  assert(curl_easy_getinfo(handle, CURLINFO_FILETIME_T, &filetime));
 
   SEXP classes = PROTECT(Rf_allocVector(STRSXP, 2));
   SET_STRING_ELT(classes, 0, Rf_mkChar("POSIXct"));
   SET_STRING_ELT(classes, 1, Rf_mkChar("POSIXt"));
 
-  SEXP out = PROTECT(Rf_ScalarInteger(filetime));
+  SEXP out = PROTECT(Rf_ScalarReal(filetime < 0 ? NA_REAL : (double) filetime));
   Rf_setAttrib(out, R_ClassSymbol, classes);
   UNPROTECT(2);
   return out;
